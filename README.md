@@ -20,8 +20,7 @@ En webbapplikation för att söka efter böcker via **Google Books API**, läsa 
 ## Installation
 1. Klona detta repo:
    ```bash
-   git clone https://github.com/ditt-användarnamn/ditt-repo.git
-   cd ditt-repo
+   git clone https://github.com/kashef0/React_Project_BE.git
    ```
 2. Installera beroenden:
    ```bash
@@ -31,7 +30,6 @@ En webbapplikation för att söka efter böcker via **Google Books API**, läsa 
    ```env
    MONGO_URI=din-mongodb-url
    JWT_SECRET=din-hemliga-nyckel
-   GOOGLE_BOOKS_API_KEY=din-api-nyckel
    ```
 4. Starta servern:
    ```bash
