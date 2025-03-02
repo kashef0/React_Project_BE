@@ -1,11 +1,10 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config();
 
-const handleUser = require('./routes/UserRouter')
-
+const handleUser = require('./routes/UserRouter');
+const handleReview = require('./routes/ReviewRouter');
 
 const app = express();
 
@@ -15,6 +14,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/user', handleUser);
+app.use('/review', handleReview);
 
 
 
