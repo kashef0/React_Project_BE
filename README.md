@@ -62,9 +62,3 @@ En webbapplikation för att söka efter böcker via **Google Books API**, läsa 
 - Registrera en användare
 - Logga in för att skriva och hantera recensioner
 - Sök böcker och läs recensioner
-
-## Förbättringar & TODOs
-- Implementera bättre felhantering
-- Lägg till användarprofilsidor
-- Förbättra UI i frontend
-
