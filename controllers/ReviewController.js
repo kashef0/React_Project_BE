@@ -55,10 +55,13 @@ exports.getUserReviews = async (req, res) => {
 exports.createReview = async (req, res) => {
     const {bookId, reviewText, rating} = req.body;
     const userId = req.user.id;
+    if (!bookId || !reviewText || !rating) {
+        return res.status(400).json({ message: "alla fält måste fyllas..." });
+    }
     try {
-        const excitingReview = await Review.findOne({bookId: bookId})
+        const excitingReview = await Review.findOne({bookId, userId})
         if (excitingReview) {
-            return res.status(400).json({message: "review finns redan." })
+            return res.status(400).json({message: "Du har redan recenserat den här boken.." })
         }
         const review = new Review({
             bookId,
@@ -71,7 +74,7 @@ exports.createReview = async (req, res) => {
             return res.status(400).json({message: "något fel händer..."})
         }
         await review.save();
-        res.json(review);
+        res.status(201).json({ message: "Recensionen har skapats", review });
         
     } catch (err) {
         res.status(500).json({ error: err.message });
