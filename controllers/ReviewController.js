@@ -29,7 +29,7 @@ exports.getReviewByBookId = async (req, res) => {
             return res.status(404).json({ message: 'Inga recensioner hittades för denna boken' });
         }
 
-        res.json({review: reviews});
+        res.status(200).json(reviews);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
