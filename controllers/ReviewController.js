@@ -19,17 +19,37 @@ exports.getReviews = async (req, res) => {
 
 exports.getReviewByBookId = async (req, res) => {
 
-    const bookId = req.params.id;
+    const {bookId} = req.params;
     if (!bookId) {
         return res.status(404).json({message: "review med angivna id hittades ej..."});
     }
     try {
         const reviews = await Review.find({ bookId }).populate("userId", "username");
+        if (!reviews || reviews.length === 0) {
+            return res.status(404).json({ message: 'Inga recensioner hittades för denna boken' });
+        }
+
         res.json({review: reviews});
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
 }
+
+exports.getUserReviews = async (req, res) => {
+    try {
+        const { userId } = req.params;
+
+        const reviews = await Review.find({ userId }).populate('userId', 'username'); 
+
+        if (!reviews || reviews.length === 0) {
+            return res.status(404).json({ message: 'Inga recensioner hittades för denna användare' });
+        }
+
+        res.status(200).json({ reviews });
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error: error.message });
+    }
+};
 
 
 exports.createReview = async (req, res) => {
