@@ -4,7 +4,7 @@ const { signin, signUp, getUser } = require('../controllers/UserConstroller');
 const router = express.Router();
 
 
-router.get("/", getUser);
+router.get("/:userId", getUser);
 router.post("/signup", signUp);
 router.post("/signin", signin);
 

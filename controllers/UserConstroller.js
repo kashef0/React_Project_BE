@@ -5,10 +5,14 @@ const bcrypt = require('bcryptjs');
 
 
 exports.getUser = async (req, res) => {
+    const {userId} = req.params;
+    if (!userId) {
+        return res.status(404).json({message: "user med angivna id hittades ej..."});
+    }
     try {
-        const users = await User.find(req.User)
-        if (!users) {
-            return res.status(404).json({message: "det finns inga användare..."})
+        const users = await User.findById(userId); 
+        if (!users || users.length === 0) {
+            return res.status(404).json({ message: 'Inga users hittades för denna boken' });
         }
         res.status(200).json(users);
     } catch (error) {
