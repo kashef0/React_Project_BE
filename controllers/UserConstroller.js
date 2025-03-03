@@ -4,6 +4,19 @@ const bcrypt = require('bcryptjs');
 
 
 
+exports.getUser = async (req, res) => {
+    try {
+        const users = await User.find(req.User)
+        if (!users) {
+            return res.status(404).json({message: "det finns inga användare..."})
+        }
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+}
+
+
 exports.signUp = async (req, res) => {
     try {
         const {username, email, password } = req.body;
