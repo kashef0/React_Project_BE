@@ -6,7 +6,7 @@ const Auth = require('../auth/Auth');
 const router = express.Router();
 
 router.get("/", getReviews);
-router.get("/book/:bookId", Auth, getReviewByBookId);
+router.get("/book/:bookId", getReviewByBookId);
 router.get("/user/:userId", Auth, getUserReviews);
 router.post("/create", Auth, createReview);
 router.put("/update/:id", Auth, updateReview);
