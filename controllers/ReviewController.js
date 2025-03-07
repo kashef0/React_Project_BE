@@ -65,7 +65,7 @@ exports.createReview = async (req, res) => {
         }
         const review = new Review({
             bookId,
-            userId: userObjectId,
+            userId,
             reviewText,
             rating
         });
