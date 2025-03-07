@@ -24,7 +24,7 @@ exports.getReviewByBookId = async (req, res) => {
         return res.status(404).json({message: "review med angivna id hittades ej..."});
     }
     try {
-        const reviews = await Review.find({ bookId });
+        const reviews = await Review.find({ bookId }).populate('userId', 'username');
         if (!reviews || reviews.length === 0) {
             return res.status(404).json({ message: 'Inga recensioner hittades för denna boken' });
         }
