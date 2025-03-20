@@ -18,9 +18,11 @@ const userSchema = new schema({
     password: {
         type: String,
         required: true,
-        minlength: [8, 'Password must be at least 8 characters long'], // Minimum length validation
-        maxlength: [20, 'Password must not exceed 20 characters'], // Maximum length validation
-        match: [/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,20}$/, 'Lösenordet måste innehålla minst en stor bokstav, en liten bokstav, en siffra och ett specialtecken.'],
+        minlength: [6, 'Lösenordet måste vara minst 6 tecken långt'], // Minimum length validation
+        match: [
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
+            'Lösenordet måste innehålla minst en stor bokstav, en liten bokstav, en siffra och ett specialtecken.'
+        ]
     }
 })
 
