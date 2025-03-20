@@ -53,17 +53,17 @@ exports.signin = async (req, res) => {
         const {email, password} = req.body;
 
         if (!email || !password) {
-            return res.status(400).json({ message: "E-post och lösenord krävs." });
+            return res.status(400).send("E-post och lösenord krävs.");
         }
 
         const user = await User.findOne({email: email.toLowerCase()})
         if (!user) {
-            return res.status(401).json({ message: "Felaktig e-post eller lösenord." });
+            return res.status(401).send("Felaktig e-post eller lösenord.");
         }
 
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(401).json({ message: "Felaktig e-post eller lösenord." });
+            return res.status(401).send("Felaktig e-post eller lösenord." );
         }
 
         const token = jwt.sign(
