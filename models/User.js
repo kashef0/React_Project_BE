@@ -18,7 +18,6 @@ const userSchema = new schema({
     password: {
         type: String,
         required: true,
-        minlength: [6, 'Lösenordet måste vara minst 6 tecken långt'], // Minimum length validation
     }
 })
 

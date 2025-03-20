@@ -31,7 +31,7 @@ exports.signUp = async (req, res) => {
 
         const existingUser = await User.findOne({email: email.toLowerCase()});
         if (existingUser) {
-            return res.status(400).send("E-postadressen används redan.")
+            return res.status(400).json({message: "E-postadressen används redan."})
         }
 
         const hashPassword = await bcrypt.hash(password, 10);
@@ -41,13 +41,8 @@ exports.signUp = async (req, res) => {
             password: hashPassword
         })
         await newUser.save();
-        res.status(201).send("Användaren har registrerats.")
+        res.status(201).json({message: "Användaren har registrerats."})
     } catch (error) {
-        if (error.name === "ValidationError") {
-            // Handle Mongoose validation errors
-            const validationErrors = Object.values(error.errors)[1].join(", ");
-            return res.status(400).send(validationErrors);
-        }
         res.status(500).json({ message: "Serverfel.", error: error.message });
     }
 }
