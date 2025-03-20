@@ -45,8 +45,8 @@ exports.signUp = async (req, res) => {
     } catch (error) {
         if (error.name === "ValidationError") {
             // Handle Mongoose validation errors
-            const validationErrors = Object.values(error.errors).map(err => err.message);
-            return res.status(400).json({ message: "Fel vid registrering", errors: validationErrors });
+            const validationErrors = Object.values(error.errors)[1].join(", ");
+            return res.status(400).send(validationErrors);
         }
         res.status(500).json({ message: "Serverfel.", error: error.message });
     }

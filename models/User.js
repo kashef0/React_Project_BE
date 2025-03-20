@@ -19,10 +19,6 @@ const userSchema = new schema({
         type: String,
         required: true,
         minlength: [6, 'Lösenordet måste vara minst 6 tecken långt'], // Minimum length validation
-        match: [
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/,
-            'Lösenordet måste innehålla minst en stor bokstav, en liten bokstav, en siffra och ett specialtecken.'
-        ]
     }
 })
 
