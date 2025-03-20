@@ -29,6 +29,13 @@ exports.signUp = async (req, res) => {
             return res.status(400).json({message: 'Alla fält är obligatoriska.'})
         }
 
+        const passwordValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+        if (!passwordValidation.test(password)) {
+            return res.status(400).send(
+                'Lösenordet måste vara minst 8 tecken långt, innehålla en stor bokstav, en liten bokstav, ett nummer och ett specialtecken.'
+            );
+        }
+
         const existingUser = await User.findOne({email: email.toLowerCase()});
         if (existingUser) {
             return res.status(400).json({message: "E-postadressen används redan."})
