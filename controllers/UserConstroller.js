@@ -26,7 +26,7 @@ exports.signUp = async (req, res) => {
         const {username, email, password } = req.body;
 
         if (!username || !email || !password) {
-            return res.status(400).send('Alla fält är obligatoriska.')
+            return res.status(400).json({message: 'Alla fält är obligatoriska.'})
         }
 
         const existingUser = await User.findOne({email: email.toLowerCase()});
