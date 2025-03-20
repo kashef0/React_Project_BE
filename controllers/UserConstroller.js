@@ -23,18 +23,21 @@ exports.getUser = async (req, res) => {
 
 exports.signUp = async (req, res) => {
     try {
+        console.log('Request Body:', req.body);
         const {username, email, password } = req.body;
 
-        if (!username || !email || !password) {
-            return res.status(400).json({message: 'Alla fält är obligatoriska.'})
-        }
-
+       
         const passwordValidation = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
         if (!passwordValidation.test(password)) {
             return res.status(400).send(
                 'Lösenordet måste vara minst 8 tecken långt, innehålla en stor bokstav, en liten bokstav, ett nummer och ett specialtecken.'
             );
         }
+
+        if (!username || !email || !password) {
+            return res.status(400).json({message: 'Alla fält är obligatoriska.'})
+        }
+
 
         const existingUser = await User.findOne({email: email.toLowerCase()});
         if (existingUser) {
