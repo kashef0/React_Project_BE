@@ -41,8 +41,13 @@ exports.signUp = async (req, res) => {
             password: hashPassword
         })
         await newUser.save();
-        res.status(201).json({ message: "Användaren har registrerats."})
+        res.status(201).send("Användaren har registrerats.")
     } catch (error) {
+        if (error.name === "ValidationError") {
+            // Handle Mongoose validation errors
+            const validationErrors = Object.values(error.errors).map(err => err.message).join(", ");
+            return res.status(400).send(validationErrors);
+        }
         res.status(500).json({ message: "Serverfel.", error: error.message });
     }
 }
